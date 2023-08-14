@@ -37,9 +37,9 @@ struct SmartArray
 	}
 	int get_element(int i)
 	{
-		if (i >= size)
+		if (i >= size || i<0)
 		{
-			return -1;
+			throw Exception();
 		}
 		else
 		{
@@ -65,10 +65,6 @@ struct SmartArray
 			size++;
 			delete[]arr;
 			arr = arr1;
-			for (int i = 0; i != size; ++i)
-			{
-				arr[i] = arr1[i];
-			}
 			capacity++;
 		}
 	}
@@ -97,9 +93,11 @@ struct SmartArray
 		}
 		else
 		{
+			delete[]arr;
 			capacity = array.capacity;
 			size = array.size;
-			for (int i = 0; i < size; i++)
+			arr = new int[capacity];
+			for (int i = 0; i < capacity; i++)
 			{
 				arr[i] = array.arr[i];
 			}
